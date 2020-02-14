@@ -35,3 +35,17 @@ chown -R 999.999 mongo_data
 chown -R 1000.1000 es_data
 chown -R 1000.1000 graylog_journal
 ```
+
+#### syslog client test
+```
+nc -u 192.168.100.18 8514
+tcpdump -vv -n -i enp0s3 port 8514
+```
+
+#### syslog setting
+```
+vim /etc/rsyslog.d/90-graylog2.conf
+*.* @192.168.100.17:8514;RSYSLOG_SyslogProtocol23Format
+
+systemctl restart rsyslog
+```

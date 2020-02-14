@@ -40,7 +40,7 @@ services:
   graylog:
     image: graylog/graylog:3.2
     container_name: graylog
-    #hostname: graylog
+    hostname: graylog
     environment:
       - GRAYLOG_ROOT_TIMEZONE=Asia/Seoul
       # CHANGE ME (must be at least 16 characters)!
