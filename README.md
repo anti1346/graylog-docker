@@ -9,24 +9,26 @@ usermod -a -G docker $USER;
 docker version;
 ```
 
+
 ### docker-compose install
+[DOCKER-COMPOSE](https://github.com/docker/compose/releases)
 ```
 curl -fsSL https://github.com/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose;
 chmod +x /usr/local/bin/docker-compose;
 docker-compose version;
 ```
-[DOCKER-COMPOSE](https://github.com/docker/compose/releases)
+
 
 ### ctop install
-
+[CTOP](https://github.com/bcicen/ctop)
 ```
 curl -fsSL https://github.com/bcicen/ctop/releases/download/v0.7.3/ctop-0.7.3-linux-amd64 -O /usr/local/bin/ctop;
 chmod +x /usr/local/bin/ctop;
 ctop -v
 ```
-[CTOP](https://github.com/bcicen/ctop)
 
-## 
+
+## graylog install
 ```
 mkdir -p {mongo_data,es_data,graylog_journal}
 chown -R 999.999 mongo_data
