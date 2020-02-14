@@ -15,7 +15,7 @@ curl -fsSL https://github.com/docker/compose/releases/download/1.25.4/docker-com
 chmod +x /usr/local/bin/docker-compose;
 docker-compose version;
 ```
-;https://github.com/docker/compose/releases
+[DOCKER-COMPOSE](https://github.com/docker/compose/releases)
 
 ctop install
 
@@ -24,9 +24,11 @@ curl -fsSL https://github.com/bcicen/ctop/releases/download/v0.7.3/ctop-0.7.3-li
 chmod +x /usr/local/bin/ctop;
 ctop -v
 ```
-;https://github.com/bcicen/ctop
+[CTOP](https://github.com/bcicen/ctop)
 
+```
 mkdir -p {mongo_data,es_data,graylog_journal}
 chown -R 999.999 mongo_data
 chown -R 1000.1000 es_data
 chown -R 1000.1000 graylog_journal
+```
