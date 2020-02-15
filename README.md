@@ -33,7 +33,7 @@ ctop -v
 mkdir -p {mongo_data,es_data,graylog_journal}
 chown -R 999.999 mongo_data
 chown -R 1000.1000 es_data
-chown -R 1000.1000 graylog_journal
+chown -R 1100.1100 graylog_data
 ```
 
 #### syslog client test

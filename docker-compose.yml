@@ -1,14 +1,17 @@
 version: '3.0'
 services:
 
-  # MongoDB: https://hub.docker.com/_/mongo/
+  # MongoDB
   mongodb:
     #image: mongo:latest
     image: mongo:3.6.15
     restart: on-failure
     container_name: mongodb
+    volumes:
+      - ./mongo_data:/data/db
 
-  # Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/6.x/docker.html
+
+  # Elasticsearch
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.2
     restart: always
@@ -31,12 +34,12 @@ services:
         hard: 65535
     volumes:
       - ./es_data:/usr/share/elasticsearch/data
-      #- ./es_config:/usr/share/elasticsearch/config
     ports:
       - 9200:9200
       - 9300:9300
 
-  # Graylog: https://hub.docker.com/r/graylog/graylog/
+
+  # Graylog
   graylog:
     image: graylog/graylog:3.2
     container_name: graylog
@@ -64,7 +67,9 @@ services:
       - elasticsearch
     volumes:
       #- /usr/share/zoneinfo/Asia/Seoul:/etc/localtime:ro
-      - ./graylog_journal:/usr/share/graylog/data/graylog_journal
+      - ./graylog_data/config:/usr/share/graylog/data/config
+      - ./graylog_data/journal:/usr/share/graylog/data/journal
+      - ./graylog_data/plugin:/usr/share/graylog/data/plugin
     ports:
       # Graylog web interface and REST API
       - 9000:9000
