@@ -30,7 +30,7 @@ ctop -v
 
 ## graylog install
 ```
-mkdir -p {mongo_data,es_data,graylog_journal}
+mkdir -p {mongo_data,es_data,graylog_data}
 chown -R 999.999 mongo_data
 chown -R 1000.1000 es_data
 chown -R 1100.1100 graylog_data
