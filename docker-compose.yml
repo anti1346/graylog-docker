@@ -3,10 +3,12 @@ services:
 
   # MongoDB
   mongodb:
-    #image: mongo:latest
     image: mongo:3.6.15
+    #image: mongo:latest
     restart: on-failure
     container_name: mongodb
+    environment:
+      - TZ=Asia/Seoul
     volumes:
       - ./mongo_data:/data/db
 
@@ -23,15 +25,21 @@ services:
       - transport.host=localhost
       - network.host=0.0.0.0
       - bootstrap.memory_lock=true
+      # Disable X-Pack security: https://www.elastic.co/guide/en/elasticsearch/reference/5.6/security-settings.html#general-security-settings
       - xpack.security.enabled=false
+      - xpack.watcher.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.security.audit.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.graph.enabled=false
       - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
       nofile:
-        soft: 65535
-        hard: 65535
+        soft: 65536
+        hard: 65536
     volumes:
       - ./es_data:/usr/share/elasticsearch/data
     ports:
@@ -51,14 +59,14 @@ services:
       # Password: admin
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
       - GRAYLOG_HTTP_BIND_ADDRESS=0.0.0.0:9000
-      - GRAYLOG_HTTP_EXTERNAL_URI=http://192.168.100.17:9000/
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://20.20.7.85:9000/
     ulimits:
       memlock:
         soft: -1
         hard: -1
       nofile:
-        soft: 65535
-        hard: 65535
+        soft: 65536
+        hard: 65536
     links:
       - mongodb:mongo
       - elasticsearch
@@ -66,10 +74,10 @@ services:
       - mongodb
       - elasticsearch
     volumes:
-      #- /usr/share/zoneinfo/Asia/Seoul:/etc/localtime:ro
-      - ./graylog_data/config:/usr/share/graylog/data/config
+      - /usr/share/zoneinfo/Asia/Seoul:/etc/localtime:ro
+      #- ./graylog_data/config:/usr/share/graylog/data/config
       - ./graylog_data/journal:/usr/share/graylog/data/journal
-      - ./graylog_data/plugin:/usr/share/graylog/data/plugin
+      #- ./graylog_data/plugin:/usr/share/graylog/data/plugin
     ports:
       # Graylog web interface and REST API
       - 9000:9000
